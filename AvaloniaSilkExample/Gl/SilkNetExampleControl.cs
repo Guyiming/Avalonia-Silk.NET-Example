@@ -73,7 +73,7 @@ namespace Tutorial
             _vbo.Bind();
             _vao.Bind();
             _shader.Use();
-            _shader.SetUniform("uBlue", (float) Math.Sin(DateTime.Now.Millisecond / 1000f * Math.PI));
+            //_shader.SetUniform("uBlue", (float) Math.Sin(DateTime.Now.Millisecond / 1000f * Math.PI));
 
             _gl.DrawElements(PrimitiveType.Triangles, (uint) Indices.Length, DrawElementsType.UnsignedInt, null);
             Dispatcher.UIThread.Post(RequestNextFrameRendering, DispatcherPriority.Background);
