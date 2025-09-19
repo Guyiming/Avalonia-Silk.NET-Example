@@ -64,7 +64,7 @@ namespace Tutorial
 
         protected override unsafe void OnOpenGlRender(GlInterface gl, int fb)
         {
-            _gl.ClearColor(Color.Firebrick);
+            _gl.ClearColor(Color.White);//±³¾°É«
             _gl.Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit));
             _gl.Enable(EnableCap.DepthTest);
             _gl.Viewport(0,0, (uint)Bounds.Width, (uint)Bounds.Height);
@@ -76,7 +76,7 @@ namespace Tutorial
             _shader.SetUniform("uBlue", (float) Math.Sin(DateTime.Now.Millisecond / 1000f * Math.PI));
 
             _gl.DrawElements(PrimitiveType.Triangles, (uint) Indices.Length, DrawElementsType.UnsignedInt, null);
-            Dispatcher.UIThread.Post(InvalidateVisual, DispatcherPriority.Background);
+            Dispatcher.UIThread.Post(RequestNextFrameRendering, DispatcherPriority.Background);
         }
     }
 }
