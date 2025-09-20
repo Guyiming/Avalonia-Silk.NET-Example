@@ -2,7 +2,7 @@
 #version 330 core
 //The input variables, again prefixed with an f as they are the input variables of our fragment shader.
 //These have to share name for now even though there is a way around this later on.
-in vec4 fColor;
+in vec4 fColor;  //fColor这个变量来自上一个vertex shader的输出配置
   
 //The output of our fragment shader, this just has to be a vec3 or a vec4, containing the color information about
 //each "fragment" or pixel of our geometry.

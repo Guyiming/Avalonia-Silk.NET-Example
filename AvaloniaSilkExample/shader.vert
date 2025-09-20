@@ -11,7 +11,7 @@ layout (location = 1) in vec4 vColor;
 uniform float uBlue;
 
 //This is our output variable, notice that this is prefixed with an f as it's the input of our fragment shader.
-out vec4 fColor;
+out vec4 fColor; //设置输出类型及名称。 该名称在下个fragment shader中会使用。
 
 void main()
 {

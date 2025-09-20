@@ -15,16 +15,18 @@ namespace Tutorial
 
             uint vertex = LoadShader(ShaderType.VertexShader, vertexPath);
             uint fragment = LoadShader(ShaderType.FragmentShader, fragmentPath);
-            _handle = _gl.CreateProgram();
+            _handle = _gl.CreateProgram();//4.两个着色器都创建编译好了。通过Attach和Link将其组装成一个着色器程序。
             _gl.AttachShader(_handle, vertex);
             _gl.AttachShader(_handle, fragment);
             _gl.LinkProgram(_handle);
-            _gl.GetProgram(_handle, GLEnum.LinkStatus, out var status);
+
+            _gl.GetProgram(_handle, GLEnum.LinkStatus, out var status);//5.检查链接状态
             if (status == 0)
             {
                 throw new Exception($"Program failed to link with error: {_gl.GetProgramInfoLog(_handle)}");
             }
-            _gl.DetachShader(_handle, vertex);
+
+            _gl.DetachShader(_handle, vertex);//5. 一旦Link成功，GPU驱动就将程序代码复制到了那个Program中，原来的着色器对象类似于中间文件，已经没用了，立即删除。
             _gl.DetachShader(_handle, fragment);
             _gl.DeleteShader(vertex);
             _gl.DeleteShader(fragment);
@@ -32,7 +34,7 @@ namespace Tutorial
 
         public void Use()
         {
-            _gl.UseProgram(_handle);
+            _gl.UseProgram(_handle);//6. 激活这个着色器程序，可被使用
         }
 
         public void SetUniform(string name, int value)
@@ -63,9 +65,10 @@ namespace Tutorial
         private uint LoadShader(ShaderType type, string path)
         {
             string src = File.ReadAllText(path);
-            uint handle = _gl.CreateShader(type);
-            _gl.ShaderSource(handle, src);
-            _gl.CompileShader(handle);
+            uint handle = _gl.CreateShader(type);//1.根据类型创建一个空的着色器对象
+            _gl.ShaderSource(handle, src);//2. 把着色器源码附加到着色器对象上
+            _gl.CompileShader(handle);//3.编译它
+
             string infoLog = _gl.GetShaderInfoLog(handle);
             if (!string.IsNullOrWhiteSpace(infoLog))
             {
