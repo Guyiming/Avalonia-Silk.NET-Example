@@ -42,7 +42,7 @@ namespace Tutorial
             //Instantiating our new abstractions
             _ebo = new BufferObject<uint>(_gl, Indices, BufferTargetARB.ElementArrayBuffer);
             _vbo = new BufferObject<float>(_gl, Vertices, BufferTargetARB.ArrayBuffer);
-            _vao = new VertexArrayObject<float, uint>(_gl, _vbo, _ebo);
+            _vao = new VertexArrayObject<float, uint>(_gl, _vbo, _ebo);//OpenGL的core profile要求我们使用VAO,如果vao绑定失败，则不会绘制任何东西
 
             //Telling the VAO object how to lay out the attribute pointers
             _vao.VertexAttributePointer(0, 3, VertexAttribPointerType.Float, 7, 0);
