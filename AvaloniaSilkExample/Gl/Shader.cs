@@ -6,7 +6,7 @@ namespace Tutorial
 {
     public class Shader : IDisposable
     {
-        private uint _handle;
+        private uint _programID;
         private GL _gl;
 
         public Shader(GL gl, string vertexPath, string fragmentPath)
@@ -15,31 +15,31 @@ namespace Tutorial
 
             uint vertex = LoadShader(ShaderType.VertexShader, vertexPath);
             uint fragment = LoadShader(ShaderType.FragmentShader, fragmentPath);
-            _handle = _gl.CreateProgram();//4.两个着色器都创建编译好了。通过Attach和Link将其组装成一个着色器程序。
-            _gl.AttachShader(_handle, vertex);
-            _gl.AttachShader(_handle, fragment);
-            _gl.LinkProgram(_handle);
+            _programID = _gl.CreateProgram();//4.两个着色器都创建编译好了。通过Attach和Link将其组装成一个着色器程序。
+            _gl.AttachShader(_programID, vertex);
+            _gl.AttachShader(_programID, fragment);
+            _gl.LinkProgram(_programID);
 
-            _gl.GetProgram(_handle, GLEnum.LinkStatus, out var status);//5.检查链接状态
+            _gl.GetProgram(_programID, GLEnum.LinkStatus, out var status);//5.检查链接状态
             if (status == 0)
             {
-                throw new Exception($"Program failed to link with error: {_gl.GetProgramInfoLog(_handle)}");
+                throw new Exception($"Program failed to link with error: {_gl.GetProgramInfoLog(_programID)}");
             }
 
-            _gl.DetachShader(_handle, vertex);//5. 一旦Link成功，GPU驱动就将程序代码复制到了那个Program中，原来的着色器对象类似于中间文件，已经没用了，立即删除。
-            _gl.DetachShader(_handle, fragment);
+            _gl.DetachShader(_programID, vertex);//5. 一旦Link成功，GPU驱动就将程序代码复制到了那个Program中，原来的着色器对象类似于中间文件，已经没用了，立即删除。
+            _gl.DetachShader(_programID, fragment);
             _gl.DeleteShader(vertex);
             _gl.DeleteShader(fragment);
         }
 
         public void Use()
         {
-            _gl.UseProgram(_handle);//6. 激活这个着色器程序，可被使用
+            _gl.UseProgram(_programID);//6. 激活这个着色器程序，可被使用
         }
 
         public void SetUniform(string name, int value)
         {
-            int location = _gl.GetUniformLocation(_handle, name);
+            int location = _gl.GetUniformLocation(_programID, name);
             if (location == -1)
             {
                 throw new Exception($"{name} uniform not found on shader.");
@@ -49,7 +49,7 @@ namespace Tutorial
 
         public void SetUniform(string name, float value)
         {
-            int location = _gl.GetUniformLocation(_handle, name);
+            int location = _gl.GetUniformLocation(_programID, name);
             if (location == -1)
             {
                 throw new Exception($"{name} uniform not found on shader.");
@@ -59,7 +59,7 @@ namespace Tutorial
 
         public void Dispose()
         {
-            _gl.DeleteProgram(_handle);
+            _gl.DeleteProgram(_programID);
         }
 
         private uint LoadShader(ShaderType type, string path)

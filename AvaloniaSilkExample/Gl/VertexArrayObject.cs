@@ -23,7 +23,7 @@ namespace Tutorial
         /// <summary>
         /// 声明顶点内存布局结构
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">对应shader中写的location=xxx</param>
         /// <param name="count"></param>
         /// <param name="type"></param>
         /// <param name="vertexSize"></param>
