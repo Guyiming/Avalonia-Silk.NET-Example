@@ -1,6 +1,8 @@
 #version 330 core
 
-in vec4 fColor;  //fColor这个变量来自上一个vertex shader的输出配置
+
+//fColor come from last vertex shader output
+in vec4 fColor;
   
 out vec4 FragColor;
 
