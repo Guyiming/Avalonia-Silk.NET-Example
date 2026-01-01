@@ -1,10 +1,20 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Tutorial"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="AvaloniaSilkExample.MainWindow"
-        Title="AvaloniaSilkExample">
-	<local:SilkNetExampleControl/>
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Tutorial"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		x:Class="AvaloniaSilkExample.MainWindow"
+		Title="AvaloniaSilkExample">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<local:SilkNetExampleControl x:Name="glControl"/>
+		<Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="test" Click="Button_Click"/>
+		<TextBlock Grid.Row="1" x:Name="txt" Text="This is an Avalonia application hosting\n a Silk.NET OpenGL control." 
+				   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" MaxLines="30"/>
+	</Grid>
+	
 </Window>

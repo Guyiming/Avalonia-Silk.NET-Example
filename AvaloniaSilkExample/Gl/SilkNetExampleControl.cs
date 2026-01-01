@@ -3,6 +3,7 @@ using System.Drawing;
 using Avalonia.OpenGL;
 using Avalonia.OpenGL.Controls;
 using Avalonia.Threading;
+using AvaloniaSilkExample;
 using Silk.NET.OpenGL;
 
 namespace Tutorial
@@ -31,13 +32,19 @@ namespace Tutorial
         };
 
 
-
         protected override void OnOpenGlInit(GlInterface gl)
         {
             base.OnOpenGlInit(gl);
             
             _gl = GL.GetApi(gl.GetProcAddress);
-            
+
+            string version = _gl.GetStringS(StringName.Version);
+            string renderer = _gl.GetStringS(StringName.Renderer);
+            string vendor = _gl.GetStringS(StringName.Vendor);
+            string info = $"---->OpenGL Version: {version}\nVendor:{vendor}\nRenderer:{renderer}";
+            Console.WriteLine(info);
+
+            MainWindow.info = info;
 
             //Instantiating our new abstractions
             _ebo = new BufferObject<uint>(_gl, Indices, BufferTargetARB.ElementArrayBuffer);

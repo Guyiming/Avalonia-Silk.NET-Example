@@ -6,6 +6,7 @@ namespace AvaloniaSilkExample
 {
     public partial class MainWindow : Window
     {
+        public static string info="";
         public MainWindow()
         {
             InitializeComponent();
@@ -14,9 +15,15 @@ namespace AvaloniaSilkExample
 #endif
         }
 
-        private void InitializeComponent()
+        //private void InitializeComponent()
+        //{
+        //    AvaloniaXamlLoader.Load(this);
+        //}
+
+        private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            AvaloniaXamlLoader.Load(this);
+            txt.Text = info;
+
         }
     }
 }
