@@ -19,7 +19,7 @@ namespace AvaloniaSilkExample
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .With(new Win32PlatformOptions { RenderingMode = new[] { Win32RenderingMode.Wgl } })
+                //.With(new Win32PlatformOptions { RenderingMode = new[] { Win32RenderingMode.Wgl } })
                 .LogToTrace();
     }
 }

@@ -1,5 +1,7 @@
-#version 330 core
+#version 300 es
+precision mediump float;
 
+//#version 330 core
 
 //fColor come from last vertex shader output
 in vec4 fColor;
